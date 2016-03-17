@@ -27,7 +27,26 @@ class Person < Creature
 	def dead(zombie)
 		dead_x = @positionx.between?(zombie.positionx - 1, zombie.positionx + 1)
 		dead_y = @positiony.between?(zombie.positiony - 1, zombie.positiony + 1)
-		dead_x === true && dead_y == true ? @is_dead = true : @is_dead = false
+		if @pickup_weapon === true
+			3.times do |n|
+				disparo = rand(0..1)
+				puts "Resultado del disparo: #{disparo}"
+				if disparo === 1
+					@zombie_dead = true
+					puts "HeadShot!!!...Muere Zombieeee!!!!"
+					break
+				else
+					@zombie_dead = false
+					puts "Noooo... no le dí!, me quedan #{3 - (n+1)} intentos!"
+				end
+			end
+		else
+			if dead_x === true && dead_y === true
+				@is_dead = true
+			end
+		end
+
+		#dead_x === true && dead_y === true ? @is_dead = true : @is_dead = false
 		#puts "Coordenadas #{@name} x: #{@positionx} - y: #{@positiony} | Coordenadas #{zombie.name} x:#{zombie.positionx} - y: #{zombie.positiony}"
 	end
 
@@ -36,7 +55,11 @@ class Person < Creature
 		on_y = @positiony.between?(weapon.positiony, weapon.positiony)
 		puts "#{@positionx} - #{weapon.positionx}"
 		puts "#{@positiony} - #{weapon.positiony}"
-		on_x === true && on_y === true && @pickup_weapon === false ? puts(picked_weapon?) : puts("#{@name} dice: No hay armas por acá... o ya tienes una en tu poder")
+		if @pickup_weapon === false
+			if on_x === true && on_y === true 
+				puts(picked_weapon?) 
+			end
+		end
 		#puts "Coordenadas #{@name} x: #{@positionx} - y: #{@positiony} | Coordenadas #{zombie.name} x:#{zombie.positionx} - y: #{zombie.positiony}"
 	end
 

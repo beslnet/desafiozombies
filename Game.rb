@@ -29,39 +29,53 @@ end
 count = 0 
 dead = false
 
+while humans.count > 0 && zombies.count > 0
 
 	humans.each do |p|
 		count += 1
 		puts p.object_id
-		#p.run
+		p.run
 		puts "#{p.name} tiene arma?: #{p.pickup_weapon}"
 		guns.each do |g|
 			p.pick_up g
 			puts "#{p.name} tiene el arma: #{p.pickup_weapon}"
+			if p.pickup_weapon === true
+				guns.delete(g)
+			end
 		end
-		# zombies.each do |q|
-		# 	q.walk
-		# 	p.danger q 
-		# 	dead = p.dead q
-		# 	if dead === true
-		# 		humans.delete(p)
-		# 		puts "#{p.name} ha sido mordido por #{q.name} y se ha transformado en Zombie :-("
-		# 		zombies << Zombie.new(p.name)
-		# 		puts zombies.length
-		# 		puts humans.length
-		# 		break
-		# 	end
-		# 		dogs.each do |r|
-		# 			r.run
-		# 			r.attack q
-		# 			dead = r.attack q
-		# 			if dead === true
-		# 				zombies.delete(q)
-		# 				puts "Tenemos un Zombie menos: #{q.name}, lo ha matado un perro!"
-		# 			end
-		# 		end
-		# end
+		zombies.each do |q|
+			q.walk
+			p.danger q
+			dead = p.dead q
+			#puts "El zombie ha muerto: #{p.zombie_dead}"
+			puts "Persona ha muerto: #{p.is_dead}"
+			if p.zombie_dead == true
+				zombies.delete(q)
+				puts "#{p.name} ha matado al zombie #{q.name} yeah lmL"
+			else
+
+				if dead === true
+					humans.delete(p)
+					puts "#{p.name} ha sido mordido por #{q.name} y se ha transformado en Zombie :-("
+					if p.pickup_weapon === true
+						guns << Guns.new("#{WEAPON.sample}", p.positionx, p.positiony)
+					end
+					zombies << Zombie.new(p.name)
+					break
+				end
+			end
+				dogs.each do |r|
+					r.run
+					r.attack q
+					dead = r.attack q
+					if dead === true
+						zombies.delete(q)
+						puts "Tenemos un Zombie menos: #{q.name}, lo ha matado un perro!"
+					end
+				end
+		end
 	end
+end
 
 
 
