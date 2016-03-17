@@ -31,15 +31,19 @@ class Person < Creature
 		#puts "Coordenadas #{@name} x: #{@positionx} - y: #{@positiony} | Coordenadas #{zombie.name} x:#{zombie.positionx} - y: #{zombie.positiony}"
 	end
 
-	def picks_arm(gun)
-
+	def pick_up(weapon)
+		on_x = @positionx.between?(weapon.positionx, weapon.positionx)
+		on_y = @positiony.between?(weapon.positiony, weapon.positiony)
+		puts "#{@positionx} - #{weapon.positionx}"
+		puts "#{@positiony} - #{weapon.positiony}"
+		on_x === true && on_y === true && @pickup_weapon === false ? puts(picked_weapon?) : puts("#{@name} dice: No hay armas por acá... o ya tienes una en tu poder")
+		#puts "Coordenadas #{@name} x: #{@positionx} - y: #{@positiony} | Coordenadas #{zombie.name} x:#{zombie.positionx} - y: #{zombie.positiony}"
 	end
 
-	# def zombified(zombie)
-	# 	puts "El Zombie #{zombie.name} ha mordido a #{@name}"
-	# 	@dead = true
-	# 	#return @dead
-	# end
+	def picked_weapon?
+		@pickup_weapon = true
+		return @pickup_weapon
+	end
 
 	def to_s
 		"Es una persona, su nombre es #{@name}, se encuentra en las siguientes coordenadas x: #{@positionx}, y: #{@positiony}"
