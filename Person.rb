@@ -39,6 +39,7 @@ class Person < Creature
 				end
 			else			
 				@is_dead = true
+				puts "#{@name} está desarmad@...."
 			end
 		end
 	end

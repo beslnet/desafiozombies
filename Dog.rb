@@ -16,7 +16,6 @@ class Dog < Creature
 	def attack(zombie)
 		cerca_x = @positionx.between?(zombie.positionx - 3, zombie.positionx + 3)
 		cerca_y = @positiony.between?(zombie.positiony - 3, zombie.positiony + 3)
-		cerca_x === true && cerca_y == true ? @is_dead = true: puts("Grrrrrrr wofff wofff!!!")
-		#puts "Coordenadas #{@name} x: #{@positionx} - y: #{@positiony} | Coordenadas #{zombie.name} x:#{zombie.positionx} - y: #{zombie.positiony}"
+		cerca_x === true && cerca_y == true ? @is_dead = true: puts("Perro cerca de un Zombie: Grrrrrrr wofff wofff!!!")
 	end
 end
