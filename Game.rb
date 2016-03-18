@@ -35,10 +35,8 @@ while humans.count > 0 && zombies.count > 0
 		count += 1
 		puts p.object_id
 		p.run
-		puts "#{p.name} tiene arma?: #{p.pickup_weapon}"
 		guns.each do |g|
 			p.pick_up g
-			puts "#{p.name} tiene el arma: #{p.pickup_weapon}"
 			if p.pickup_weapon === true
 				guns.delete(g)
 			end
@@ -47,8 +45,6 @@ while humans.count > 0 && zombies.count > 0
 			q.walk
 			p.danger q
 			dead = p.dead q
-			#puts "El zombie ha muerto: #{p.zombie_dead}"
-			puts "Persona ha muerto: #{p.is_dead}"
 			if p.zombie_dead == true
 				zombies.delete(q)
 				puts "#{p.name} ha matado al zombie #{q.name} yeah lmL"
