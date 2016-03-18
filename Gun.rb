@@ -3,7 +3,7 @@ require "pp"
 
 class Gun < Creature
 	
-	def initialize(name=nil, positionx=10, positiony=10)
+	def initialize(name=nil, positionx=nil, positiony=nil)
 		@name = name || "#{ARMS.sample}"
 		@positionx = positionx || rand(MAP[0])
 		@positiony = positiony || rand(MAP[1])

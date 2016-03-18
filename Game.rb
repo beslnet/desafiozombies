@@ -13,15 +13,15 @@ guns = []
 	zombies << Zombie.new
 end
 
-10.times do |n|
+20.times do |n|
 	humans << Person.new
 end
 
-10.times do |n|
+1.times do |n|
 	dogs << Dog.new("Perro-#{n}")
 end
 
-20.times do |n|
+60.times do |n|
 	guns << Gun.new("#{WEAPON.sample}")
 end
 
@@ -36,6 +36,7 @@ while humans.count > 0 && zombies.count > 0
 			p.pick_up g
 			if p.pickup_weapon === true
 				guns.delete(g)
+				break
 			end
 		end
 		zombies.each do |q|
@@ -46,12 +47,11 @@ while humans.count > 0 && zombies.count > 0
 				zombies.delete(q)
 				puts "#{p.name} ha matado al zombie #{q.name} yeah lmL"
 			else
-
 				if p.is_dead === true
 					humans.delete(p)
 					puts "#{p.name} ha sido mordido por #{q.name} y se ha transformado en Zombie :-("
 					if p.pickup_weapon === true
-						guns << Guns.new("#{WEAPON.sample}", p.positionx, p.positiony)
+						guns << Gun.new("#{WEAPON.sample}", p.positionx, p.positiony)
 					end
 					zombies << Zombie.new(p.name)
 					break
